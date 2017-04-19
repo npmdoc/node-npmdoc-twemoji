@@ -105,6 +105,12 @@
 
         <li>
 
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">twemoji.</span>twemoji_npm</span>
+
+        </li>
+
+        <li>
+
             <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">twemoji.</span>base</span>
 
         </li>
@@ -146,6 +152,76 @@
             function <span class="apidocSignatureSpan">twemoji.convert.</span>toCodePoint
             <span class="apidocSignatureSpan">(unicodeSurrogates, sep)</span>
             </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.twemoji.twemoji_npm">module twemoji.twemoji_npm</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.twemoji.twemoji_npm.onerror">
+            function <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>onerror
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.twemoji.twemoji_npm.parse">
+            function <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>parse
+            <span class="apidocSignatureSpan">(what, how)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.twemoji.twemoji_npm.replace">
+            function <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>replace
+            <span class="apidocSignatureSpan">(text, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.twemoji.twemoji_npm.test">
+            function <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>test
+            <span class="apidocSignatureSpan">(text)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>convert</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>base</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>className</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>ext</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>size</span>
 
         </li>
 
@@ -294,6 +370,8 @@ Each of them accepts a callback to generate an image source or an options object
 
 
 
+
+
 </div>
 
 <div class="apidocSectionDiv">
@@ -384,6 +462,149 @@ twemoji.convert.toCodePoint(&#x27;\ud83c\udde8\ud83c\uddf3&#x27;, &#x27;~&#x27;)
 // &#x22;1f1e8~1f1f3&#x22;
 ...</pre></li>
     </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.twemoji.twemoji_npm" id="apidoc.module.twemoji.twemoji_npm">module twemoji.twemoji_npm</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.twemoji.twemoji_npm.onerror" id="apidoc.element.twemoji.twemoji_npm.onerror">
+        function <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>onerror
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function onerror() {
+  if (this.parentNode) {
+    this.parentNode.replaceChild(createText(this.alt), this);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.twemoji.twemoji_npm.parse" id="apidoc.element.twemoji.twemoji_npm.parse">
+        function <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>parse
+        <span class="apidocSignatureSpan">(what, how)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function parse(what, how) {
+  if (!how || typeof how === &#x27;function&#x27;) {
+    how = {callback: how};
+  }
+  // if first argument is string, inject html &#x3c;img&#x3e; tags
+  // otherwise use the DOM tree and parse text nodes only
+  return (typeof what === &#x27;string&#x27; ? parseString : parseNode)(what, {
+    callback:   how.callback || defaultImageSrcGenerator,
+    attributes: typeof how.attributes === &#x27;function&#x27; ? how.attributes : returnNull,
+    base:       typeof how.base === &#x27;string&#x27; ? how.base : twemoji.base,
+    ext:        how.ext || twemoji.ext,
+    size:       how.folder || toSizeSquaredAsset(how.size || twemoji.size),
+    className:  how.className || twemoji.className,
+    onerror:    how.onerror || twemoji.onerror
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Everything else is pretty much the same, so if you were using the defaults, all you need to do is to add the version `2/` before
+ the `twemoji.js` file you were using.
+
+
+## API
+
+Following are all the methods exposed in the `twemoji` namespace.
+
+### twemoji.<span class="apidocCodeKeywordSpan">parse</span>( ... ) V1
+
+This is the main parsing utility and has 3 overloads per parsing type.
+
+There are mainly two kinds of parsing: [string parsing](https://github.com/twitter/twemoji#string-parsing) and [DOM parsing](https
+://github.com/twitter/twemoji#dom-parsing).
+
+Each of them accepts a callback to generate an image source or an options object with parsing info.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.twemoji.twemoji_npm.replace" id="apidoc.element.twemoji.twemoji_npm.replace">
+        function <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>replace
+        <span class="apidocSignatureSpan">(text, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function replace(text, callback) {
+  return String(text).replace(re, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+* This is the most raw version used by
+*  the .parse(string) method itself.
+*
+* @param   string    generic string to parse
+* @param   Function  a generic callback that will be
+*                    invoked to replace the content.
+*                    This calback wil receive standard
+*                    String.prototype.<span class="apidocCodeKeywordSpan">replace</span>(str, callback)
+*                    arguments such:
+*  callback(
+*    rawText,  // the emoji match
+*  );
+*
+*                    and others commonly received via replace.
+*/
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.twemoji.twemoji_npm.test" id="apidoc.element.twemoji.twemoji_npm.test">
+        function <span class="apidocSignatureSpan">twemoji.twemoji_npm.</span>test
+        <span class="apidocSignatureSpan">(text)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function test(text) {
+  // IE6 needs a reset before too
+  re.lastIndex = 0;
+  var result = re.test(text);
+  re.lastIndex = 0;
+  return result;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+   * Simplify string tests against emoji.
+   *
+   * @param   string  some text that might contain emoji
+   * @return  boolean true if any emoji was found, false otherwise.
+   *
+   * @example
+   *
+   *  if (twemoji.<span class="apidocCodeKeywordSpan">test</span>(someContent)) {
+   *    console.log(&#x22;emoji All The Things!&#x22;);
+   *  }
+   */
+  test: test
+},
+
+// used to escape HTML special chars in attributes
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
 
 
 </div>
